@@ -1,22 +1,26 @@
 import React from "react";
 import "./App.css";
+import Cat from "./components/Cat/Cat";
 import { svg } from "./svg";
 
 function App() {
+  const handleSvgClick = () => {
+    const div = document.getElementById("hero-cat");
+    div.classList.add("shake");
+    div.addEventListener(
+      "animationend",
+      () => {
+        div.classList.remove("shake");
+      },
+      { once: true }
+    );
+  };
+
   return (
     <div className="main-container">
-      <div>{svg["Hero"]}</div>
-
-      <div className="container">
-        <div className="cat">
-          <div className="ear"></div>
-          <div className="eye"></div>
-          <div className="mouth"></div>
-          <div className="nose"></div>
-          <div className="tail"></div>
-          <div className="body"></div>
-          <div className="bubble"></div>
-        </div>
+      <div className="hero-container" onClick={handleSvgClick} id="hero-cat">
+        <div className="svg-container">{svg["Hero"]}</div>
+        <Cat />
       </div>
     </div>
   );

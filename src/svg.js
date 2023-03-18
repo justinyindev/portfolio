@@ -9,20 +9,20 @@ export const svg = {
     >
       <rect x="324" width="98" height="227" rx="18" fill="#353535" />
       <rect x="299" y="223" width="149" height="21" rx="10.5" fill="#353535" />
-      <path d="M357 244H390V257H357V244Z" fill="#D9D9D9" />
-      <path d="M368 261H378V296H368V261Z" fill="#D9D9D9" />
-      <path d="M366 257H380V261H366V257Z" fill="#D9D9D9" />
+      <path d="M357 244H390V257H357V244Z" fill="#B3B3B3" />
+      <path d="M368 261H378V296H368V261Z" fill="#B3B3B3" />
+      <path d="M366 257H380V261H366V257Z" fill="#B3B3B3" />
       <path
         d="M308 306.833L368 296V298.917L312.5 308.917V311H308V306.833Z"
-        fill="#D9D9D9"
+        fill="#B3B3B3"
       />
       <path
         d="M438 306.833L378 296V298.917L433.5 308.917V311H438V306.833Z"
-        fill="#D9D9D9"
+        fill="#B3B3B3"
       />
-      <rect x="368" y="296" width="10" height="3" fill="#D9D9D9" />
+      <rect x="368" y="296" width="10" height="3" fill="#B3B3B3" />
       <circle cx="309" cy="313" r="4" fill="#2D2D2D" />
-      <rect x="371" y="296" width="4" height="15" fill="#D9D9D9" />
+      <rect x="371" y="296" width="4" height="15" fill="#B3B3B3" />
       <circle cx="373" cy="314" r="4" fill="#2D2D2D" />
       <circle cx="437" cy="314" r="4" fill="#2D2D2D" />
       <path
@@ -78,13 +78,13 @@ export const svg = {
       />
       <path
         d="M346.177 96.3933C346.177 95.5649 346.848 94.8933 347.677 94.8933H361.371C362.2 94.8933 362.871 95.5649 362.871 96.3933V103.543C362.871 105.476 361.304 107.043 359.371 107.043H349.677C347.744 107.043 346.177 105.476 346.177 103.543V96.3933Z"
-        fill="#D9D9D9"
+        fill="#B3B3B3"
         fillOpacity="0.75"
         stroke="black"
       />
       <path
         d="M368.295 96.3933C368.295 95.5649 368.967 94.8933 369.795 94.8933H383.49C384.318 94.8933 384.99 95.5649 384.99 96.3933V103.543C384.99 105.476 383.423 107.043 381.49 107.043H371.795C369.862 107.043 368.295 105.476 368.295 103.543V96.3933Z"
-        fill="#D9D9D9"
+        fill="#B3B3B3"
         fillOpacity="0.75"
         stroke="black"
       />
