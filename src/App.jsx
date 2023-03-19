@@ -127,7 +127,7 @@ function App() {
           />
         </div>
       </div>
-      {true && (
+      {showContentAfterHeading && (
         <div className="about-me-container" ref={revealRef}>
           <AboutMe />
         </div>
