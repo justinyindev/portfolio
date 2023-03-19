@@ -1,5 +1,5 @@
 .about-me-content-container {
-  width: 100%;
+  width: 75%;
   height: 500px;
   background-color: #ffffff;
   display: flex;
@@ -9,17 +9,73 @@
 
 .about-me-text {
   font-size: 14px;
-  padding: 8px;
   letter-spacing: 0.32px;
   line-height: 24px;
 }
 
 .about-me-text-container {
+  padding: 8px;
+  margin: 12px;
   flex: 1;
   flex-direction: column;
 }
 
+a:link {
+  text-decoration: none !important;
+}
+
+.strong-text {
+  background-color: #d7e0c8;
+  padding: 2px;
+  border-radius: 12px;
+}
+
+.strong-text:hover {
+  transform: translateY(-3px);
+}
+
+.content-href {
+  font-size: 16px;
+  text-decoration: none !important;
+  padding: 4px;
+  color: #000000;
+}
+
 .about-me-svg {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: red;
+}
+
+.contact-me {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100px;
+}
+
+.contact-me-heading {
+  margin: 0;
+}
+
+.contact-me-list-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+}
+
+.list-item {
+  font-size: 14px;
+  width: 200px;
+  padding: 8px;
+  border-radius: 12px;
+  margin: 2px;
+  background-color: #d7e0c8;
+}
+
+.list-item:hover {
+  transform: translateY(-3px);
+  cursor: pointer;
 }

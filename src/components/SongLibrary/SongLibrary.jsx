@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { svg } from "../../static/svg";
 import Song from "../Song/Song";
 import "./SongLibrary.css";
 
-const SongLibrary = ({
-  songs,
-  setCurrentSong,
-  audioRef,
-  isPlaying,
-  setSongs,
-}) => {
+const SongLibrary = ({ audioRef }) => {
+  const { songs } = useSelector((state) => state.song);
   const [showSongList, setShowSongList] = useState(false);
+  const songLibraryRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        songLibraryRef.current &&
+        !songLibraryRef.current.contains(event.target)
+      ) {
+        setShowSongList(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div
       className="songlib-container"
+      ref={songLibraryRef}
       style={{
-        transform: showSongList ? "translateX(0%)" : "translateX(100%)",
+        transform: showSongList ? "translateX(0%)" : "translateX(-100%)",
       }}
     >
       <div
@@ -28,15 +42,7 @@ const SongLibrary = ({
       <div className="library-container">
         <div className="song-list">
           {songs.map((song, index) => (
-            <Song
-              song={song}
-              songs={songs}
-              setCurrentSong={setCurrentSong}
-              audioRef={audioRef}
-              isPlaying={isPlaying}
-              setSongs={setSongs}
-              key={index}
-            />
+            <Song song={song} audioRef={audioRef} key={index} />
           ))}
         </div>
       </div>

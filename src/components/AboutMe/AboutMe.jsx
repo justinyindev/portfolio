@@ -1,26 +1,45 @@
 import React from "react";
+import { translations } from "../../static/translations";
 import "./AboutMe.css";
 
 const AboutMe = () => {
   return (
     <div className="about-me-content-container">
-      <div className="about-me-svg"></div>
       <div className="about-me-text-container">
+        <h1 className="about-me-heading">About me</h1>
         <p className="about-me-text">
-          I'm a music-loving, multi-instrumentalist, die-hard Portland
-          Trailblazers fan with a Witcher 3 addiction. I live for music and
-          basketball, and gaming is my escape from reality. The Witcher 3 is my
-          all-time favorite game, and I love the way it immerses me in a world
-          of adventure and excitement. I'm passionate about connecting with
-          others who share my interests and values, and I'm always looking for
-          opportunities to learn and grow. Whether we're talking music, sports,
-          gaming, or anything else I'm passionate about. I'm here for it.
+          {translations["AboutMe"]["intro"]}
         </p>
         <p className="about-me-text">
-          Head on over to my Github lair to uncover the secrets of my latest
-          projects and witness the magic of code in action.
+          Head on over to my{" "}
+          <span className="strong-text">
+            <a className="content-href" href="https://github.com/justinyindev">
+              Github
+            </a>
+          </span>{" "}
+          lair to uncover the secrets of my latest projects and witness the
+          magic of code in action.
         </p>
+        <div className="contact-me">
+          <h1 className="contact-me-heading">Contact me</h1>
+          <div className="contact-me-list-container">
+            <li className="list-item">
+              <a className="content-href" href="mailto:zzyin@uwaterloo.ca">
+                Email
+              </a>
+            </li>
+            <li className="list-item">
+              <a
+                className="content-href"
+                href="https://www.linkedin.com/in/zi-zhou-yin-b8836b1b6/"
+              >
+                LinkedIn
+              </a>
+            </li>
+          </div>
+        </div>
       </div>
+      <div className="about-me-svg"></div>
     </div>
   );
 };

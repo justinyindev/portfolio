@@ -1,24 +1,21 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
 import Cat from "./components/Cat/Cat";
-import IntroHeading from "./components/IntroHeading/IntroHeading";
+import TypeWriter from "./components/TypeWriter/TypeWriter";
 import { svg } from "./static/svg";
-import { playlist } from "./static/playlist";
 import Player from "./components/Player/Player";
 import SongLibrary from "./components/SongLibrary/SongLibrary";
 import AboutMe from "./components/AboutMe/AboutMe";
+import { useDispatch, useSelector } from "react-redux";
+import { setSongs, setCurrentSong, setSongInfo } from "./redux/songSlice";
+import { useAudioPlayer } from "./hooks/useAudioPlayer";
+import { activeSongHandler } from "./utils/activeSongHandler";
 
-function App() {
-  const [songs, setSongs] = useState(playlist);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSong, setCurrentSong] = useState(playlist[0]);
+const App = () => {
+  const dispatch = useDispatch();
+  const { songs, isPlaying, currentSong } = useSelector((state) => state.song);
   const audioRef = useRef(null);
   const revealRef = useRef(null);
-  const [songInfo, setSongInfo] = useState({
-    currentTime: 0,
-    duration: 0,
-    percentage: 0,
-  });
   const [showContentAfterHeading, setShowContentAfterHeading] = useState(false);
 
   const handleShowContent = () => {
@@ -33,55 +30,34 @@ function App() {
     const roundDuration = Math.round(e.target.duration);
     const percentage = Math.round((roundCurr / roundDuration) * 100);
 
-    setSongInfo({
-      currentTime,
-      duration,
-      percentage,
-    });
-  };
-
-  const activeSongHandler = (nextPrev) => {
-    const newSongs = songs.map((newSong) => {
-      if (newSong.name === nextPrev.name) {
-        return {
-          ...newSong,
-          active: true,
-        };
-      } else {
-        return {
-          ...newSong,
-          active: false,
-        };
-      }
-    });
-    setSongs(newSongs);
-    audioRef.current.play();
+    dispatch(
+      setSongInfo({
+        currentTime,
+        duration,
+        percentage,
+      })
+    );
   };
 
   const songEndHandler = () => {
     const currentIndex = songs.findIndex(
       (song) => song.name === currentSong.name
     );
-    setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-    activeSongHandler(songs[(currentIndex + 1) % songs.length]);
+    const temp = songs[(currentIndex + 1) % songs.length];
+
+    dispatch(setCurrentSong(temp));
+    activeSongHandler(temp, songs, dispatch, setSongs);
   };
 
-  useEffect(() => {
-    if (!currentSong) return;
-    const nextSong = async () => {
-      if (isPlaying) await audioRef.current.play();
-    };
-
-    nextSong();
-  }, [currentSong, isPlaying]);
+  useAudioPlayer(audioRef, currentSong, isPlaying);
 
   const renderHero = () => {
     if (currentSong.name === "Crossing Field") {
-      return svg["HeroSAO"]
+      return svg["HeroSAO"];
     } else {
-      return svg["HeroAwake"]
+      return svg["HeroAwake"];
     }
-  }
+  };
 
   return (
     <div>
@@ -92,48 +68,36 @@ function App() {
         onLoadedMetadata={timeHandler}
         onEnded={songEndHandler}
       ></audio>
-      <div className="main-container">
-        <div className="song-library-container">
-          <SongLibrary
-            songs={songs}
-            setCurrentSong={setCurrentSong}
-            audioRef={audioRef}
-            isPlaying={isPlaying}
-            setSongs={setSongs}
-          />
+      <div className="portfolio-content-container hero-section">
+        <div className="main-page-song-library-container">
+          <SongLibrary audioRef={audioRef} />
         </div>
-
-        <div className="hero-container">
+        <div>
           <div className="svg-container">
             {isPlaying ? renderHero() : svg["Hero"]}
           </div>
           <Cat awake={isPlaying} />
         </div>
-        <IntroHeading
+        <TypeWriter
           handleShowContent={handleShowContent}
           showContentAfterHeading={showContentAfterHeading}
         />
-        <div className="music-container">
-          <Player
-            audioRef={audioRef}
-            isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
-            currentSong={currentSong}
-            setCurrentSong={setCurrentSong}
-            songs={songs}
-            setSongs={setSongs}
-            songInfo={songInfo}
-            setSongInfo={setSongInfo}
-          />
+        <div className="main-page-music-container">
+          <Player audioRef={audioRef} />
         </div>
       </div>
-      {showContentAfterHeading && (
-        <div className="about-me-container" ref={revealRef}>
-          <AboutMe />
-        </div>
+      {true && (
+        <>
+          <div
+            className="portfolio-content-container about-me-section"
+            ref={revealRef}
+          >
+            <AboutMe />
+          </div>
+        </>
       )}
     </div>
   );
-}
+};
 
 export default App;

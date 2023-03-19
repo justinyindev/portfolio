@@ -1,5 +1,7 @@
 .song-container {
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: row;
   width: 100%;
   margin: 8px;
@@ -40,4 +42,18 @@
 
 .active {
   background-color: #d7e0c8;
+}
+
+@media (max-width: 1300px) {
+  .song-container {
+    padding: 0 6px;
+  }
+
+  .song-image {
+    display: none;
+  }
+
+  .song-title {
+    font-size: 12px;
+  }
 }

@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useAudioPlayer } from "../../hooks/useAudioPlayer";
+import { setCurrentSong, setSongs } from "../../redux/songSlice";
 import "./Song.css";
 
-const Song = ({
-  song,
-  songs,
-  setCurrentSong,
-  audioRef,
-  isPlaying,
-  setSongs,
-}) => {
-  const selectSong = async () => {
-    await setCurrentSong(song);
+const Song = ({ song, audioRef }) => {
+  const { songs, isPlaying, currentSong } = useSelector((state) => state.song);
+  const dispatch = useDispatch();
+
+  const selectSong = () => {
+    dispatch(setCurrentSong(song));
     const newSongs = songs.map((newSong) => {
       if (newSong.name === song.name) {
         return {
@@ -24,17 +23,10 @@ const Song = ({
         };
       }
     });
-    setSongs(newSongs);
+    dispatch(setSongs(newSongs));
   };
 
-  useEffect(() => {
-    if (!songs) return;
-    const play = async () => {
-      if (isPlaying) await audioRef.current.play();
-    };
-
-    play();
-  }, [songs, isPlaying, audioRef]);
+  useAudioPlayer(audioRef, currentSong, isPlaying);
 
   return (
     <div

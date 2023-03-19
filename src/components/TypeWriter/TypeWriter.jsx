@@ -1,9 +1,9 @@
 import React from "react";
 import Typewriter from "typewriter-effect";
 import { translations } from "../../static/translations";
-import "./IntroHeading.css";
+import "./TypeWriter.css";
 
-const IntroHeading = ({ showContentAfterHeading, handleShowContent }) => {
+const TypeWriter = ({ showContentAfterHeading, handleShowContent }) => {
   return (
     <div>
       <Typewriter
@@ -35,4 +35,4 @@ const IntroHeading = ({ showContentAfterHeading, handleShowContent }) => {
   );
 };
 
-export default IntroHeading;
+export default TypeWriter;

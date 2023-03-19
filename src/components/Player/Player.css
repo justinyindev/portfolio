@@ -75,3 +75,9 @@ input[type="range"]::-moz-range-track {
   width: 100%;
   justify-content: space-between;
 }
+
+@media (max-width: 600px){
+  .player-container{
+    width: 300px;
+  }
+}

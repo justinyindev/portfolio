@@ -1,39 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { svg } from "../../static/svg";
 import Button from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSongs,
+  setIsPlaying,
+  setCurrentSong,
+  setSongInfo,
+} from "../../redux/songSlice";
+import { useAudioPlayer } from "../../hooks/useAudioPlayer";
+import { activeSongHandler } from "../../utils/activeSongHandler";
 import "./Player.css";
 
-const Player = ({
-  currentSong,
-  setCurrentSong,
-  setIsPlaying,
-  isPlaying,
-  audioRef,
-  songInfo,
-  setSongs,
-  songs,
-  setSongInfo,
-}) => {
-  const activeSongHandler = (nextPrev) => {
-    const newSongs = songs.map((newSong) => {
-      if (newSong.name === nextPrev.name) {
-        return {
-          ...newSong,
-          active: true,
-        };
-      } else {
-        return {
-          ...newSong,
-          active: false,
-        };
-      }
-    });
-    setSongs(newSongs);
-  };
+const Player = ({ audioRef }) => {
+  const dispatch = useDispatch();
+  const { songs, currentSong, isPlaying, songInfo } = useSelector(
+    (state) => state.song
+  );
 
-  const playSongHandler = () => {
-    isPlaying ? audioRef.current.pause() : audioRef.current.play();
-    setIsPlaying(!isPlaying);
+  const playSongHandler = async () => {
+    isPlaying ? await audioRef.current.pause() : await audioRef.current.play();
+    dispatch(setIsPlaying(!isPlaying));
   };
 
   const getTime = (time) => {
@@ -42,39 +29,36 @@ const Player = ({
     );
   };
 
-  const nextSong = async () => {
+  const nextSong = () => {
     let currentIndex = songs.findIndex(
       (song) => song.name === currentSong.name
     );
-    await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-    activeSongHandler(songs[(currentIndex + 1) % songs.length]);
+    const songToUpdate = songs[(currentIndex + 1) % songs.length];
+
+    dispatch(setCurrentSong(songToUpdate));
+    activeSongHandler(songToUpdate, songs, dispatch, setSongs);
   };
 
-  const prevSong = async () => {
+  const prevSong = () => {
     let currentIndex = songs.findIndex(
       (song) => song.name === currentSong.name
     );
-    if ((currentIndex - 1) % songs.length === -1) {
-      await setCurrentSong(songs[songs.length - 1]);
-      activeSongHandler(songs[currentIndex - 1]);
-    } else {
-      await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
-      activeSongHandler(songs[(currentIndex - 1) % songs.length]);
-    }
+    let temp = songs[currentIndex];
+
+    temp =
+      (currentIndex - 1) % songs.length === -1
+        ? songs[songs.length - 1]
+        : songs[(currentIndex - 1) % songs.length];
+
+    dispatch(setCurrentSong(temp));
+    activeSongHandler(temp, songs, dispatch, setSongs);
   };
 
-  useEffect(() => {
-    if (!currentSong) return;
-    const nextSong = async () => {
-      if (isPlaying) await audioRef.current.play();
-    };
-
-    nextSong();
-  }, [currentSong, isPlaying, audioRef]);
+  useAudioPlayer(audioRef, currentSong, isPlaying);
 
   const dragHandler = (e) => {
     audioRef.current.currentTime = e.target.value;
-    setSongInfo({ ...songInfo, currentTime: e.target.value });
+    dispatch(setSongInfo({ ...songInfo, currentTime: e.target.value }));
   };
 
   return (
@@ -84,7 +68,6 @@ const Player = ({
       <div className="track">
         <span className="song-time">{getTime(songInfo.currentTime)}</span>
         <input
-          id="mySlider"
           className="slider"
           min={0}
           max={songInfo.duration || 0}
