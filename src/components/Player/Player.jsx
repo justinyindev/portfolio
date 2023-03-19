@@ -82,9 +82,7 @@ const Player = ({
       <p className="song-name">{currentSong.name}</p>
       <p className="artist-name">{currentSong.artist}</p>
       <div className="track">
-        <span className="song-time">
-          {songInfo.currentTime && getTime(songInfo.currentTime)}
-        </span>
+        <span className="song-time">{getTime(songInfo.currentTime)}</span>
         <input
           id="mySlider"
           className="slider"

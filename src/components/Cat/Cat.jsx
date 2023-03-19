@@ -11,7 +11,7 @@ const Cat = ({ awake }) => {
         <div className="nose"></div>
         <div className="tail"></div>
         <div className="body"></div>
-        {!awake ? <div className="bubble"></div> : null}
+        {!awake && <div className="bubble"></div>}
       </div>
     </div>
   );
