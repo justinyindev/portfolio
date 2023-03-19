@@ -27,7 +27,7 @@ const SongLibrary = ({
       </div>
       <div className="library-container">
         <div className="song-list">
-          {songs.map((song) => (
+          {songs.map((song, index) => (
             <Song
               song={song}
               songs={songs}
@@ -35,7 +35,7 @@ const SongLibrary = ({
               audioRef={audioRef}
               isPlaying={isPlaying}
               setSongs={setSongs}
-              key={song.name}
+              key={index}
             />
           ))}
         </div>
