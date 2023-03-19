@@ -1,17 +1,17 @@
 import React from "react";
 import "./Cat.css";
 
-const Cat = () => {
+const Cat = ({ awake }) => {
   return (
-    <div className="container">
+    <div className="cat-container">
       <div className="cat">
         <div className="ear"></div>
-        <div className="eye"></div>
+        <div className={!awake ? "eye" : "awake-eyes"}></div>
         <div className="mouth"></div>
         <div className="nose"></div>
         <div className="tail"></div>
         <div className="body"></div>
-        <div className="bubble"></div>
+        {!awake ? <div className="bubble"></div> : null}
       </div>
     </div>
   );

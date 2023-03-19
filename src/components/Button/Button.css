@@ -1,0 +1,17 @@
+.button {
+    border-radius: 12px;
+    background-color: inherit;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 25px;
+}
+
+.button:hover{
+    cursor: pointer;
+    background-color: #e1ffa0;
+    transform: translateY(-2px);
+    box-shadow: 2px;
+}
