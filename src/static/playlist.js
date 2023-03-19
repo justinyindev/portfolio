@@ -64,7 +64,7 @@ export const playlist = [
     active: false,
   },
   {
-    name: "Pacific'",
+    name: "Pacific",
     cover:
       "https://chillhop.com/wp-content/uploads/2020/07/8404541e3b694d16fd79433b142ed910f36764dd-1024x1024.jpg",
     artist: "No Spirit",

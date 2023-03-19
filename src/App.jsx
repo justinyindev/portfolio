@@ -75,6 +75,14 @@ function App() {
     nextSong();
   }, [currentSong, isPlaying]);
 
+  const renderHero = () => {
+    if (currentSong.name === "Crossing Field") {
+      return svg["HeroSAO"]
+    } else {
+      return svg["HeroAwake"]
+    }
+  }
+
   return (
     <div>
       <audio
@@ -97,7 +105,7 @@ function App() {
 
         <div className="hero-container">
           <div className="svg-container">
-            {isPlaying ? svg["HeroAwake"] : svg["Hero"]}
+            {isPlaying ? renderHero() : svg["Hero"]}
           </div>
           <Cat awake={isPlaying} />
         </div>
