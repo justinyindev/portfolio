@@ -4,6 +4,7 @@
   left: 0;
   width: 100%;
   height: 25px;
+  animation: fade-in 1s forwards;
 }
 
 .scroll-indicator::before {

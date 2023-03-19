@@ -6,17 +6,24 @@ import { svg } from "./static/svg";
 import { playlist } from "./static/playlist";
 import Player from "./components/Player/Player";
 import SongLibrary from "./components/SongLibrary/SongLibrary";
+import AboutMe from "./components/AboutMe/AboutMe";
 
 function App() {
   const [songs, setSongs] = useState(playlist);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(playlist[0]);
   const audioRef = useRef(null);
+  const revealRef = useRef(null);
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
     duration: 0,
     percentage: 0,
   });
+  const [showContentAfterHeading, setShowContentAfterHeading] = useState(false);
+
+  const handleShowContent = () => {
+    setShowContentAfterHeading(true);
+  };
 
   const timeHandler = (e) => {
     const currentTime = e.target.currentTime;
@@ -94,7 +101,10 @@ function App() {
           </div>
           <Cat awake={isPlaying} />
         </div>
-        <IntroHeading />
+        <IntroHeading
+          handleShowContent={handleShowContent}
+          showContentAfterHeading={showContentAfterHeading}
+        />
         <div className="music-container">
           <Player
             audioRef={audioRef}
@@ -109,6 +119,11 @@ function App() {
           />
         </div>
       </div>
+      {true && (
+        <div className="about-me-container" ref={revealRef}>
+          <AboutMe />
+        </div>
+      )}
     </div>
   );
 }

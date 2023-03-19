@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Typewriter from "typewriter-effect";
 import { translations } from "../../static/translations";
 import "./IntroHeading.css";
 
-const IntroHeading = () => {
-  const [showContentAfterHeading, setShowContentAfterHeading] = useState(false);
-
-  const handleShowContent = () => {
-    setShowContentAfterHeading(true);
-  };
-
+const IntroHeading = ({ showContentAfterHeading, handleShowContent }) => {
   return (
     <div>
       <Typewriter
@@ -33,9 +27,9 @@ const IntroHeading = () => {
         }}
       />
       <div className="content">
-        {showContentAfterHeading ? (
+        {showContentAfterHeading && (
           <div className="scroll-indicator"></div>
-        ) : null}
+        )}
       </div>
     </div>
   );
