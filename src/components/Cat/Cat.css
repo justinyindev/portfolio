@@ -157,3 +157,9 @@
   border-radius: 50px 50px 50px 5px;
   animation: bubble-scale 3s infinite;
 }
+
+@media (max-width: 1000px) {
+  .cat-container {
+    display: none;
+  }
+}

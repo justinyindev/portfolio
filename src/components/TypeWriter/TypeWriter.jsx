@@ -26,7 +26,7 @@ const TypeWriter = ({ showContentAfterHeading, handleShowContent }) => {
             .start();
         }}
       />
-      <div className="content">
+      <div className="scroll-indicator-container">
         {showContentAfterHeading && (
           <div className="scroll-indicator"></div>
         )}

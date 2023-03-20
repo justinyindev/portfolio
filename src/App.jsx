@@ -72,10 +72,8 @@ const App = () => {
         <div className="main-page-song-library-container">
           <SongLibrary audioRef={audioRef} />
         </div>
-        <div>
-          <div className="svg-container">
-            {isPlaying ? renderHero() : svg["Hero"]}
-          </div>
+        <div className="hero-svg-container">
+          {isPlaying ? renderHero() : svg["Hero"]}
           <Cat awake={isPlaying} />
         </div>
         <TypeWriter

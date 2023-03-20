@@ -36,6 +36,14 @@ body {
   height: 100vh;
 }
 
+.hero-svg-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+}
+
 .about-me-section {
   background-color: #ffffff;
 }

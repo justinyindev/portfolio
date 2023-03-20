@@ -1,10 +1,19 @@
-.about-me-content-container {
-  width: 75%;
+.about-me-container {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-me-content {
+  display: flex;
+  width: 85%;
   height: 500px;
-  background-color: #ffffff;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
 }
 
 .about-me-text {
@@ -16,8 +25,16 @@
 .about-me-text-container {
   padding: 8px;
   margin: 12px;
-  flex: 1;
+  width: 50%;
+  display: flex;
   flex-direction: column;
+}
+
+.about-me-svg {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a:link {
@@ -41,41 +58,26 @@ a:link {
   color: #000000;
 }
 
-.about-me-svg {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: red;
-}
+@media (max-width: 1200px) {
+  .about-me-container {
+    align-items: flex-start;
+  }
 
-.contact-me {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 100px;
-}
+  .about-me-content {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 
-.contact-me-heading {
-  margin: 0;
-}
+  .about-me-text {
+    font-size: 11px;
+  }
 
-.contact-me-list-container {
-  display: flex;
-  flex-direction: column;
-  margin: 2px;
-}
+  .about-me-text-container {
+    width: 100%;
+    margin-bottom: 0;
+  }
 
-.list-item {
-  font-size: 14px;
-  width: 200px;
-  padding: 8px;
-  border-radius: 12px;
-  margin: 2px;
-  background-color: #d7e0c8;
-}
-
-.list-item:hover {
-  transform: translateY(-3px);
-  cursor: pointer;
+  .about-me-svg {
+    width: 100%;
+  }
 }
