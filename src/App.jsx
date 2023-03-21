@@ -88,6 +88,7 @@ const App = () => {
         <>
           <div
             className="portfolio-content-container about-me-section"
+            id="about-me-section"
             ref={revealRef}
           >
             <AboutMe />

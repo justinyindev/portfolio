@@ -34,7 +34,6 @@
   padding: 0;
   margin: 0;
   height: 12px;
-  margin: 12px;
 }
 
 input[type="range"] {
@@ -73,11 +72,45 @@ input[type="range"]::-moz-range-track {
 .play-control {
   display: flex;
   width: 100%;
+  margin: 8px;
   justify-content: space-between;
 }
 
-@media (max-width: 600px){
-  .player-container{
+.volume-control {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 8px;
+}
+
+.volume-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d7e0c8;
+  border: none;
+  border-radius: 12px;
+  padding: 2px 12px;
+  margin: 0px 2px;
+}
+
+.volume-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.volume-button:hover {
+  transform: translateY(-3px);
+  background-color: #e1ffa0;
+}
+
+@media (max-width: 600px) {
+  .player-container {
     width: 300px;
   }
 }

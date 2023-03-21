@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { svg } from "../../static/svg";
 import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,8 @@ import "./Player.css";
 
 const Player = ({ audioRef }) => {
   const dispatch = useDispatch();
+  const [currentVolume, setCurrentVolume] = useState(1.0);
+  const [isMute, setMute] = useState(false);
   const { songs, currentSong, isPlaying, songInfo } = useSelector(
     (state) => state.song
   );
@@ -61,6 +63,23 @@ const Player = ({ audioRef }) => {
     dispatch(setSongInfo({ ...songInfo, currentTime: e.target.value }));
   };
 
+  const dragHandlerVolume = (e) => {
+    console.log(e.target.value);
+    if (audioRef) audioRef.current.volume = e.target.value;
+    setCurrentVolume(e.target.value);
+  };
+
+  const handleMute = () => {
+    setMute(!isMute);
+  };
+
+  useEffect(() => {
+    if (!audioRef) return;
+    if (isMute) {
+      audioRef.current.volume = 0;
+    } else audioRef.current.volume = currentVolume;
+  }, [isMute, audioRef, currentVolume]);
+
   return (
     <div className="player-container">
       <p className="song-name">{currentSong.name}</p>
@@ -84,6 +103,22 @@ const Player = ({ audioRef }) => {
           handleClick={playSongHandler}
         />
         <Button content={svg["Next"]} handleClick={nextSong} />
+      </div>
+      <div className="volume-control">
+        <button className="volume-button">
+          <span className="volume-icon" onClick={handleMute}>
+            {isMute ? svg["Mute"] : svg["VolumeUp"]}
+          </span>
+        </button>
+        <input
+          className="slider"
+          min={0}
+          max={1}
+          step={0.001}
+          value={currentVolume || 0}
+          onChange={dragHandlerVolume}
+          type="range"
+        />
       </div>
     </div>
   );
