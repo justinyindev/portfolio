@@ -33,7 +33,6 @@ const Song = ({ song, audioRef }) => {
       className={`song-container ${song.active ? "active" : ""}`}
       onClick={selectSong}
     >
-      <img className="song-image" src={song.cover} alt={song.name}></img>
       <div className="song-description">
         <h1 className="song-title">{song.name}</h1>
         <p className="song-artist">{song.artist}</p>

@@ -8,13 +8,6 @@
   border-radius: 12px;
 }
 
-.song-image {
-  padding: 12px;
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-}
-
 .song-description {
   display: flex;
   flex-direction: column;
@@ -47,10 +40,6 @@
 @media (max-width: 1300px) {
   .song-container {
     padding: 0 6px;
-  }
-
-  .song-image {
-    display: none;
   }
 
   .song-title {
