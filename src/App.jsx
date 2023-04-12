@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
+import { Link } from "react-scroll";
 import "./App.css";
 import Cat from "./components/Cat/Cat";
 import TypeWriter from "./components/TypeWriter/TypeWriter";
@@ -16,11 +17,6 @@ const App = () => {
   const { songs, isPlaying, currentSong } = useSelector((state) => state.song);
   const audioRef = useRef(null);
   const revealRef = useRef(null);
-  const [showContentAfterHeading, setShowContentAfterHeading] = useState(false);
-
-  const handleShowContent = () => {
-    setShowContentAfterHeading(true);
-  };
 
   const timeHandler = (e) => {
     const currentTime = e.target.currentTime;
@@ -68,33 +64,31 @@ const App = () => {
         onLoadedMetadata={timeHandler}
         onEnded={songEndHandler}
       ></audio>
-      <div className="portfolio-content-container hero-section">
-        <div className="main-page-song-library-container">
-          <SongLibrary audioRef={audioRef} />
-        </div>
+
+      <div className="section-container hero-section">
+        <SongLibrary audioRef={audioRef} />
         <div className="hero-svg-container">
           {isPlaying ? renderHero() : svg["Hero"]}
           <Cat awake={isPlaying} />
         </div>
-        <TypeWriter
-          handleShowContent={handleShowContent}
-          showContentAfterHeading={showContentAfterHeading}
-        />
-        <div className="main-page-music-container">
-          <Player audioRef={audioRef} />
-        </div>
-      </div>
-      {true && (
-        <>
-          <div
-            className="portfolio-content-container about-me-section"
-            id="about-me-section"
-            ref={revealRef}
-          >
-            <AboutMe />
+        <TypeWriter />
+        <Link
+          activeClass="active"
+          to="about-me-section"
+          spy={true}
+          smooth={true}
+          duration={500}
+        >
+          <div className="scroll-indicator-container">
+            <div className="scroll-indicator"></div>
           </div>
-        </>
-      )}
+        </Link>
+        <Player audioRef={audioRef} />
+      </div>
+
+      <div className="section-container" id="about-me-section" ref={revealRef}>
+        <AboutMe />
+      </div>
     </div>
   );
 };

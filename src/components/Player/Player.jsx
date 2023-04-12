@@ -81,44 +81,46 @@ const Player = ({ audioRef }) => {
   }, [isMute, audioRef, currentVolume]);
 
   return (
-    <div className="player-container">
-      <p className="song-name">{currentSong.name}</p>
-      <p className="artist-name">{currentSong.artist}</p>
-      <div className="track">
-        <span className="song-time">{getTime(songInfo.currentTime)}</span>
-        <input
-          className="slider"
-          min={0}
-          max={songInfo.duration || 0}
-          value={songInfo.currentTime}
-          onChange={dragHandler}
-          type="range"
-        />
-        <span className="song-time">{getTime(songInfo.duration)}</span>
-      </div>
-      <div className="play-control">
-        <Button content={svg["Prev"]} handleClick={prevSong} />
-        <Button
-          content={isPlaying ? svg["Pause"] : svg["Play"]}
-          handleClick={playSongHandler}
-        />
-        <Button content={svg["Next"]} handleClick={nextSong} />
-      </div>
-      <div className="volume-control">
-        <button className="volume-button">
-          <span className="volume-icon" onClick={handleMute}>
-            {isMute ? svg["Mute"] : svg["VolumeUp"]}
-          </span>
-        </button>
-        <input
-          className="slider"
-          min={0}
-          max={1}
-          step={0.001}
-          value={currentVolume || 0}
-          onChange={dragHandlerVolume}
-          type="range"
-        />
+    <div className="player-wrapper">
+      <div className="player-container">
+        <p className="song-name">{currentSong.name}</p>
+        <p className="artist-name">{currentSong.artist}</p>
+        <div className="track">
+          <span className="song-time">{getTime(songInfo.currentTime)}</span>
+          <input
+            className="slider"
+            min={0}
+            max={songInfo.duration || 0}
+            value={songInfo.currentTime}
+            onChange={dragHandler}
+            type="range"
+          />
+          <span className="song-time">{getTime(songInfo.duration)}</span>
+        </div>
+        <div className="play-control">
+          <Button content={svg["Prev"]} handleClick={prevSong} />
+          <Button
+            content={isPlaying ? svg["Pause"] : svg["Play"]}
+            handleClick={playSongHandler}
+          />
+          <Button content={svg["Next"]} handleClick={nextSong} />
+        </div>
+        <div className="volume-control">
+          <button className="volume-button">
+            <span className="volume-icon" onClick={handleMute}>
+              {isMute ? svg["Mute"] : svg["VolumeUp"]}
+            </span>
+          </button>
+          <input
+            className="slider"
+            min={0}
+            max={1}
+            step={0.001}
+            value={currentVolume || 0}
+            onChange={dragHandlerVolume}
+            type="range"
+          />
+        </div>
       </div>
     </div>
   );

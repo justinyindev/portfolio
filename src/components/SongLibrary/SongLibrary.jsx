@@ -26,24 +26,26 @@ const SongLibrary = ({ audioRef }) => {
   }, []);
 
   return (
-    <div
-      className="songlib-container"
-      ref={songLibraryRef}
-      style={{
-        transform: showSongList ? "translateX(0%)" : "translateX(-100%)",
-      }}
-    >
+    <div className="song-library-wrapper">
       <div
-        className="song-list-toggle"
-        onClick={() => setShowSongList(!showSongList)}
+        className="song-library"
+        ref={songLibraryRef}
+        style={{
+          transform: showSongList ? "translateX(0%)" : "translateX(-100%)",
+        }}
       >
-        {svg["Playlist"]}
-      </div>
-      <div className="library-container">
-        <div className="song-list">
-          {songs.map((song, index) => (
-            <Song song={song} audioRef={audioRef} key={index} />
-          ))}
+        <div
+          className="song-list-toggle"
+          onClick={() => setShowSongList(!showSongList)}
+        >
+          {svg["Playlist"]}
+        </div>
+        <div className="song-list-container">
+          <div className="song-list">
+            {songs.map((song, index) => (
+              <Song song={song} audioRef={audioRef} key={index} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

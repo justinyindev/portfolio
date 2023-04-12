@@ -12,14 +12,16 @@ const AboutMe = () => {
           <p className="about-me-text">{translations["AboutMe"]["intro"]}</p>
           <p className="about-me-text">
             Head on over to my{" "}
-            <span className="strong-text">
+            <button className="github-button">
               <a
                 className="content-href"
                 href="https://github.com/justinyindev"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Github
               </a>
-            </span>{" "}
+            </button>{" "}
             lair to uncover the secrets of my latest projects and witness the
             magic of code in action.
           </p>
